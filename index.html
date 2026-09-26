@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VORTEX INFO TECH | Premium Technology Store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- VORTEX BRAND INTRO / SPLASH SCREEN -->
+<div id="intro-screen">
+  <div class="vortex-background">
+    <div class="intro-grid"></div>
+    <div class="intro-particles" id="introParticles"></div>
+    <div class="light-streak ls-1"></div>
+    <div class="light-streak ls-2"></div>
+    <div class="light-streak ls-3"></div>
+  </div>
+
+  <div class="wipe-circle" id="wipeCircle"></div>
+
+  <div class="intro-content">
+    <div class="vortex-logo" id="vortexLogo">
+      <div class="logo-glow"></div>
+      <img src="C:\Users\Sujal Darji\OneDrive\Desktop\infotech\vortex-logo-full.png" alt="Vortex Info Tech" class="vortex-logo-img">
+    </div>
+
+    <p class="intro-tagline" id="introTagline">TECHNOLOGY. PERFORMANCE. POSSIBILITY.</p>
+
+    <button id="enter-store" class="enter-btn">
+      <span>ENTER STORE</span> <i class="ri-arrow-right-line"></i>
+    </button>
+  </div>
+</div>
+
+<div class="cursor-glow"></div>
+<button id="backToTop" aria-label="Back to top"><i class="ri-arrow-up-line"></i></button>
+
+<!-- CART DRAWER -->
+<div class="drawer-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="drawer-head">
+    <h3><i class="ri-shopping-bag-3-line"></i> Your Cart</h3>
+    <button class="close-btn" id="closeCart"><i class="ri-close-line"></i></button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty" id="cartEmpty"><i class="ri-shopping-bag-line"></i><p>Your cart is empty</p></div>
+  </div>
+  <div class="cart-footer" id="cartFooter">
+    <div class="cart-line"><span>Subtotal</span><strong id="cartSubtotal">₹0</strong></div>
+    <div class="cart-line"><span>Delivery</span><strong id="cartDelivery">₹0</strong></div>
+    <div class="cart-line total"><span>Total</span><strong id="cartTotal">₹0</strong></div>
+    <button class="btn btn-primary full" id="checkoutBtn">Proceed to Checkout <i class="ri-arrow-right-line"></i></button>
+  </div>
+</aside>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div class="modal-overlay" id="productModalOverlay">
+  <div class="modal product-modal">
+    <button class="close-btn" id="closeProductModal"><i class="ri-close-line"></i></button>
+    <div class="pm-grid">
+      <div class="pm-img-wrap"><img id="pmImg" src="" alt=""></div>
+      <div class="pm-info">
+        <span class="product-brand" id="pmBrand"></span>
+        <h3 id="pmName"></h3>
+        <div class="product-rating" id="pmRating"></div>
+        <div class="pm-price" id="pmPrice"></div>
+        <p class="pm-desc" id="pmDesc"></p>
+        <ul class="pm-specs" id="pmSpecs"></ul>
+        <div class="pm-qty">
+          <span>Quantity</span>
+          <div class="qty-control">
+            <button id="qtyMinus">−</button>
+            <span id="qtyVal">1</span>
+            <button id="qtyPlus">+</button>
+          </div>
+        </div>
+        <div class="pm-actions">
+          <button class="btn btn-outline" id="pmAddCart"><i class="ri-shopping-bag-3-line"></i> Add to Cart</button>
+          <button class="btn btn-primary" id="pmBuyNow">Buy Now <i class="ri-arrow-right-line"></i></button>
+        </div>
+        <div class="pm-trust">
+          <div><i class="ri-shield-check-line"></i> 1 Year Warranty</div>
+          <div><i class="ri-truck-line"></i> Free Delivery</div>
+          <div><i class="ri-refresh-line"></i> 7-Day Replacement</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORY SHOP MODAL -->
+<div class="modal-overlay" id="categoryModalOverlay">
+  <div class="modal category-modal">
+    <button class="close-btn" id="closeCategoryModal"><i class="ri-close-line"></i></button>
+    <div class="cm-head" id="cmHead">
+      <div class="cm-head-text">
+        <span class="eyebrow" id="cmEyebrow">Category</span>
+        <h3 id="cmTitle"></h3>
+        <p id="cmTagline"></p>
+      </div>
+    </div>
+    <div class="cm-grid" id="cmGrid"></div>
+  </div>
+</div>
+
+<!-- CHECKOUT / BILLING MODAL -->
+<div class="modal-overlay" id="checkoutOverlay">
+  <div class="modal checkout-modal">
+    <button class="close-btn" id="closeCheckout" aria-label="Close checkout"><i class="ri-close-line"></i></button>
+
+    <div class="checkout-header-badge">
+      <i class="ri-shield-check-fill"></i>
+      <span>256-Bit SSL Encrypted & Secure Checkout</span>
+    </div>
+
+    <div class="checkout-steps">
+      <div class="step active" data-step="1">
+        <span class="step-num"><i class="ri-map-pin-line"></i></span>
+        <div class="step-text">
+          <small>STEP 1</small>
+          <strong>Shipping & Billing</strong>
+        </div>
+      </div>
+      <div class="step-divider"></div>
+      <div class="step" data-step="2">
+        <span class="step-num"><i class="ri-bank-card-line"></i></span>
+        <div class="step-text">
+          <small>STEP 2</small>
+          <strong>Payment Method</strong>
+        </div>
+      </div>
+      <div class="step-divider"></div>
+      <div class="step" data-step="3">
+        <span class="step-num"><i class="ri-check-line"></i></span>
+        <div class="step-text">
+          <small>STEP 3</small>
+          <strong>Confirmation</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 1: BILLING & SHIPPING -->
+    <div class="checkout-panel" id="stepBilling">
+      <div class="panel-head">
+        <h3><i class="ri-map-pin-user-line"></i> Contact & Delivery Address</h3>
+        <p class="panel-subtitle">Please provide your details for invoice and doorstep delivery.</p>
+      </div>
+
+      <div class="checkout-form-grid">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="billName">Full Name <span class="req">*</span></label>
+            <div class="input-icon-wrap">
+              <i class="ri-user-3-line"></i>
+              <input type="text" id="billName" placeholder="e.g. Rahul Sharma" required autocomplete="name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="billEmail">Email Address <span class="req">*</span></label>
+            <div class="input-icon-wrap">
+              <i class="ri-mail-line"></i>
+              <input type="email" id="billEmail" placeholder="e.g. rahul.sharma@example.com" required autocomplete="email">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="billPhone">Phone Number <span class="req">*</span></label>
+            <div class="input-icon-wrap">
+              <i class="ri-phone-line"></i>
+              <input type="tel" id="billPhone" placeholder="e.g. 9876543210" required maxlength="15" autocomplete="tel">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="billPincode">PIN / Postal Code <span class="req">*</span></label>
+            <div class="input-icon-wrap">
+              <i class="ri-map-pin-2-line"></i>
+              <input type="text" id="billPincode" placeholder="e.g. 400001" required maxlength="10" autocomplete="postal-code">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="billAddress">Street Address / House No. / Flat <span class="req">*</span></label>
+          <div class="input-icon-wrap">
+            <i class="ri-building-line"></i>
+            <input type="text" id="billAddress" placeholder="e.g. Flat 402, Skyline Residency, MG Road" required class="full-input" autocomplete="street-address">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="billCity">City / Town <span class="req">*</span></label>
+            <div class="input-icon-wrap">
+              <i class="ri-community-line"></i>
+              <input type="text" id="billCity" placeholder="e.g. Mumbai" required autocomplete="address-level2">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="billState">State <span class="req">*</span></label>
+            <div class="input-icon-wrap">
+              <i class="ri-compass-3-line"></i>
+              <input type="text" id="billState" placeholder="e.g. Maharashtra" required autocomplete="address-level1">
+            </div>
+          </div>
+        </div>
+
+        <div class="address-type-selector">
+          <span class="addr-label">Address Type:</span>
+          <label class="addr-pill active">
+            <input type="radio" name="addrType" value="home" checked>
+            <i class="ri-home-4-line"></i> Home (All Day Delivery)
+          </label>
+          <label class="addr-pill">
+            <input type="radio" name="addrType" value="work">
+            <i class="ri-briefcase-line"></i> Work (10 AM - 6 PM)
+          </label>
+        </div>
+      </div>
+
+      <div class="checkout-trust-row">
+        <span><i class="ri-truck-line"></i> Free Express Delivery</span>
+        <span><i class="ri-shield-check-line"></i> 100% Genuine Products</span>
+        <span><i class="ri-refresh-line"></i> 7 Days Easy Returns</span>
+      </div>
+
+      <button class="btn btn-primary full" id="toPayment">
+        <span>Continue to Payment</span>
+        <i class="ri-arrow-right-line"></i>
+      </button>
+    </div>
+
+    <!-- STEP 2: PAYMENT METHOD -->
+    <div class="checkout-panel hidden" id="stepPayment">
+      <div class="panel-head">
+        <h3><i class="ri-secure-payment-line"></i> Choose Payment Method</h3>
+        <p class="panel-subtitle">Select UPI / QR or Cash on Delivery.</p>
+      </div>
+
+      <div class="pay-tabs" style="grid-template-columns:repeat(2,1fr);">
+        <button class="pay-tab active" data-pay="upi" type="button">
+          <i class="ri-qr-code-line"></i>
+          <span>UPI / QR</span>
+        </button>
+        <button class="pay-tab" data-pay="cod" type="button">
+          <i class="ri-hand-coin-line"></i>
+          <span>Cash on Delivery</span>
+        </button>
+      </div>
+
+      <!-- UPI / QR -->
+      <div class="pay-panel" id="payUpi">
+        <div style="text-align:center;padding:24px 16px;border:1px solid rgba(255,255,255,.10);border-radius:18px;background:rgba(255,255,255,.03);">
+          <h4 style="margin:0 0 8px;font-size:20px;">Scan & Pay</h4>
+          <p style="margin:0 0 18px;opacity:.7;font-size:13px;">Scan this QR code using any UPI app.</p>
+
+          <div style="width:230px;height:230px;margin:0 auto 16px;padding:10px;background:#fff;border-radius:16px;display:flex;align-items:center;justify-content:center;">
+            <img src="C:\Users\Sujal Darji\OneDrive\Pictures\Screenshots\Screenshot 2026-09-19 122151.png" alt="VORTEX INFO TECH UPI QR Code" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#111;font-size:70px;">
+              <i class="ri-qr-code-line"></i>
+            </div>
+          </div>
+
+          <div style="font-size:13px;opacity:.75;">
+            <i class="ri-shield-check-line"></i> Secure UPI payment
+          </div>
+        </div>
+      </div>
+
+      <!-- CASH ON DELIVERY -->
+      <div class="pay-panel hidden" id="payCod">
+        <div style="text-align:center;padding:30px 20px;border:1px solid rgba(255,255,255,.10);border-radius:18px;background:rgba(255,255,255,.03);">
+          <div style="width:64px;height:64px;margin:0 auto 14px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(52,211,153,.12);font-size:30px;">
+            <i class="ri-hand-coin-line"></i>
+          </div>
+          <h4 style="margin:0 0 8px;font-size:20px;">Cash on Delivery</h4>
+          <p style="margin:0;opacity:.7;font-size:13px;line-height:1.6;">Pay in cash when your order is delivered to your address.</p>
+        </div>
+      </div>
+
+      <div class="checkout-btn-row">
+        <button class="btn btn-outline" id="backToBilling">Back</button>
+        <button class="btn btn-primary" id="placeOrder">
+          <span id="placeOrderBtnText">Place Order</span>
+          <i class="ri-check-line"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 3: CONFIRMATION -->
+    <div class="checkout-panel hidden" id="stepConfirm">
+      <div class="order-success">
+        <div class="success-icon-wrap">
+          <div class="success-icon-ring"></div>
+          <div class="success-icon"><i class="ri-check-line"></i></div>
+        </div>
+        <span class="success-pill">ORDER CONFIRMED</span>
+        <h3>Thank You For Your Order!</h3>
+        <p class="success-sub">We've received your order and our team has started preparing it for dispatch.</p>
+
+        <div class="order-details-card">
+          <div class="od-row">
+            <span class="od-label">Order Reference:</span>
+            <span class="od-val">
+              <strong id="orderId">#ITH892144</strong>
+              <button class="copy-id-btn" id="copyOrderIdBtn" title="Copy Order ID"><i class="ri-file-copy-line"></i></button>
+            </span>
+          </div>
+          <div class="od-row">
+            <span class="od-label">Estimated Delivery:</span>
+            <span class="od-val text-cyan" id="estimatedDeliveryDate">2-3 Business Days</span>
+          </div>
+          <div class="od-row">
+            <span class="od-label">Delivery Address:</span>
+            <span class="od-val" id="confirmedAddress">-</span>
+          </div>
+          <div class="od-row">
+            <span class="od-label">Payment Status:</span>
+            <span class="od-val"><span class="badge-paid"><i class="ri-checkbox-circle-fill"></i> Confirmed</span></span>
+          </div>
+        </div>
+
+        <div class="confirmation-actions">
+          <button class="btn btn-primary" id="continueShopping"><i class="ri-shopping-bag-3-line"></i> Continue Shopping</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="logo">
+      <span class="logo-mark"><img src="C:\Users\Sujal Darji\OneDrive\Desktop\infotech\vortex-icon.png" alt="Vortex Info Tech"></span>VORTEX <span>INFO TECH</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home" class="active">Home</a>
+      <a href="#products">Products</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" aria-label="Search"><i class="ri-search-line"></i></button>
+      <button class="icon-btn" id="cartBtn" aria-label="Cart"><i class="ri-shopping-bag-3-line"></i><span class="cart-count" id="cartCount">0</span></button>
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><i class="ri-moon-line"></i></button>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="badge reveal"><i class="ri-shield-check-line"></i> Your Complete IT Solution</div>
+      <h1 class="reveal">POWER YOUR<br><span class="gradient-text">DIGITAL WORLD</span></h1>
+      <p class="reveal">Premium laptops, PCs, components &amp; technology solutions — all in one place.</p>
+      <div class="hero-btns reveal">
+        <a href="#products" class="btn btn-primary">Explore Products <i class="ri-arrow-right-line"></i></a>
+        <a href="#services" class="btn btn-outline">View Services</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-glow"></div>
+      <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=900&q=80" alt="Gaming PC setup" class="hero-img">
+      <div class="float-icon fi-1"><i class="ri-cpu-line"></i></div>
+      <div class="float-icon fi-2"><i class="ri-microchip-line"></i></div>
+      <div class="float-icon fi-3"><i class="ri-ram-line"></i></div>
+      <div class="float-icon fi-4"><i class="ri-hard-drive-2-line"></i></div>
+      <div class="float-icon fi-5"><i class="ri-macbook-line"></i></div>
+      <div class="float-icon fi-6"><i class="ri-gamepad-line"></i></div>
+      <div class="float-icon fi-7"><i class="ri-wifi-line"></i></div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span></span> Scroll</div>
+</section>
+
+<!-- BRAND STRIP -->
+<section class="brand-strip">
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>Dell</span><span>HP</span><span>Lenovo</span><span>ASUS</span><span>Acer</span><span>Apple</span><span>MSI</span><span>Logitech</span><span>Samsung</span><span>Intel</span><span>AMD</span><span>NVIDIA</span><span>Canon</span><span>Epson</span>
+      <span>Dell</span><span>HP</span><span>Lenovo</span><span>ASUS</span><span>Acer</span><span>Apple</span><span>MSI</span><span>Logitech</span><span>Samsung</span><span>Intel</span><span>AMD</span><span>NVIDIA</span><span>Canon</span><span>Epson</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT SHOWCASE -->
+<section class="section products-section" id="products">
+  <div class="container">
+    <div class="section-head reveal-up">
+      <span class="eyebrow">Catalogue</span>
+      <h2>Explore Our Technology</h2>
+      <p>Curated hardware and devices built for creators, gamers and professionals.</p>
+    </div>
+
+    <div class="cat-pills reveal-up">
+      <button class="pill active" data-filter="all">All</button>
+      <button class="pill" data-filter="laptops">Laptops</button>
+      <button class="pill" data-filter="gaming">Gaming PCs</button>
+      <button class="pill" data-filter="components">Components</button>
+      <button class="pill" data-filter="accessories">Accessories</button>
+      <button class="pill" data-filter="networking">Networking</button>
+      <button class="pill" data-filter="storage">Storage</button>
+    </div>
+
+    <div class="product-grid" id="productGrid">
+      <!-- Cards injected by script.js -->
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY SHOWCASE -->
+<section class="section category-section">
+  <div class="container">
+    <div class="section-head reveal-up light">
+      <span class="eyebrow">Categories</span>
+      <h2>Built For Every Need</h2>
+    </div>
+    <p class="cat-hint reveal-up"><i class="ri-cursor-line"></i> Click any category to browse &amp; buy</p>
+    <div class="cat-grid">
+      <div class="cat-card reveal-up" data-cat="laptops" style="background-image:url('https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80')">
+        <div class="cat-overlay"><h3>Laptops</h3><p>Work. Create. Perform.</p><span class="cat-cta">Shop Now <i class="ri-arrow-right-line"></i></span></div>
+      </div>
+      <div class="cat-card reveal-up" data-cat="gaming" style="background-image:url('https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=800&q=80')">
+        <div class="cat-overlay"><h3>Gaming PCs</h3><p>Built for Victory.</p><span class="cat-cta">Shop Now <i class="ri-arrow-right-line"></i></span></div>
+      </div>
+      <div class="cat-card reveal-up" data-cat="components" style="background-image:url('https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&w=800&q=80')">
+        <div class="cat-overlay"><h3>Components</h3><p>Build Without Limits.</p><span class="cat-cta">Shop Now <i class="ri-arrow-right-line"></i></span></div>
+      </div>
+      <div class="cat-card reveal-up" data-cat="keyboards" style="background-image:url('https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80')">
+        <div class="cat-overlay"><h3>Keyboards</h3><p>Type With Precision.</p><span class="cat-cta">Shop Now <i class="ri-arrow-right-line"></i></span></div>
+      </div>
+      <div class="cat-card reveal-up" data-cat="mouse" style="background-image:url('https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=800&q=80')">
+        <div class="cat-overlay"><h3>Mouse</h3><p>Precision In Every Click.</p><span class="cat-cta">Shop Now <i class="ri-arrow-right-line"></i></span></div>
+      </div>
+      <div class="cat-card reveal-up" data-cat="monitors" style="background-image:url('https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=800&q=80')">
+        <div class="cat-overlay"><h3>Monitors</h3><p>See Every Detail.</p><span class="cat-cta">Shop Now <i class="ri-arrow-right-line"></i></span></div>
+      </div>
+      <div class="cat-card reveal-up" data-cat="networking" style="background-image:url('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80')">
+        <div class="cat-overlay"><h3>Networking</h3><p>Stay Connected.</p><span class="cat-cta">Shop Now <i class="ri-arrow-right-line"></i></span></div>
+      </div>
+      <a href="#services" class="cat-card reveal-up" style="background-image:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80')">
+        <div class="cat-overlay"><h3>Services</h3><p>Technology That Works.</p><span class="cat-cta">View Services <i class="ri-arrow-right-line"></i></span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section services-section" id="services">
+  <div class="container">
+    <div class="section-head reveal-up">
+      <span class="eyebrow">Services</span>
+      <h2>Expert IT Services</h2>
+      <p>Hands-on support for every stage of your device's life.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card reveal-up"><i class="ri-tools-line"></i><h4>Laptop Repair</h4><p>Screen, battery, motherboard and hinge repairs by certified techs.</p></div>
+      <div class="service-card reveal-up"><i class="ri-computer-line"></i><h4>PC Assembly</h4><p>Custom-built desktops assembled and stress-tested before delivery.</p></div>
+      <div class="service-card reveal-up"><i class="ri-windows-line"></i><h4>Windows Installation</h4><p>Clean installs, driver setup and activation handled end-to-end.</p></div>
+      <div class="service-card reveal-up"><i class="ri-ram-2-line"></i><h4>RAM / SSD Upgrade</h4><p>Boost speed instantly with memory and storage upgrades.</p></div>
+      <div class="service-card reveal-up"><i class="ri-bug-line"></i><h4>Virus Removal</h4><p>Deep malware scans and system hardening for lasting protection.</p></div>
+      <div class="service-card reveal-up"><i class="ri-database-2-line"></i><h4>Data Recovery</h4><p>Recover lost files from damaged drives and corrupted systems.</p></div>
+      <div class="service-card reveal-up"><i class="ri-router-line"></i><h4>Network Setup</h4><p>Home and office networking, Wi-Fi optimization and cabling.</p></div>
+      <div class="service-card reveal-up"><i class="ri-brush-3-line"></i><h4>Computer Cleaning</h4><p>Internal dust removal and thermal paste replacement for cooler runs.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BUILD YOUR PC -->
+<section class="section build-section">
+  <div class="container build-inner">
+    <div class="build-visual reveal-up">
+      <div class="build-glow"></div>
+      <img src="https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&w=800&q=80" alt="PC build components">
+    </div>
+    <div class="build-panel reveal-up">
+      <span class="eyebrow">Configurator</span>
+      <h2>Build Your Dream PC</h2>
+      <p>Pick your components and watch your estimated price update instantly.</p>
+
+      <div class="build-row">
+        <label>CPU</label>
+        <select data-price><option value="180">Ryzen 5 5600 — ₹18,000</option><option value="320">Core i7-13700K — ₹32,000</option><option value="450">Ryzen 9 7950X — ₹45,000</option></select>
+      </div>
+      <div class="build-row">
+        <label>GPU</label>
+        <select data-price><option value="300">RTX 4060 — ₹30,000</option><option value="550">RTX 4070 Ti — ₹55,000</option><option value="900">RTX 4090 — ₹90,000</option></select>
+      </div>
+      <div class="build-row">
+        <label>RAM</label>
+        <select data-price><option value="35">16GB DDR5 — ₹3,500</option><option value="65">32GB DDR5 — ₹6,500</option></select>
+      </div>
+      <div class="build-row">
+        <label>Storage</label>
+        <select data-price><option value="45">1TB NVMe SSD — ₹4,500</option><option value="80">2TB NVMe SSD — ₹8,000</option></select>
+      </div>
+      <div class="build-row">
+        <label>Power Supply</label>
+        <select data-price><option value="40">650W 80+ Gold — ₹4,000</option><option value="65">850W 80+ Platinum — ₹6,500</option></select>
+      </div>
+      <div class="build-row">
+        <label>Cabinet</label>
+        <select data-price><option value="30">Mid Tower ATX — ₹3,000</option><option value="55">RGB Full Tower — ₹5,500</option></select>
+      </div>
+
+      <div class="build-total">
+        <span>Estimated Build Price</span>
+        <strong id="buildPrice">₹0</strong>
+      </div>
+      <button class="btn btn-primary" id="startBuild">Start Building <i class="ri-arrow-right-line"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about-section" id="about">
+  <div class="container about-inner">
+    <div class="about-visual reveal-up">
+      <img src="https://images.unsplash.com/photo-1547082299-de196ea013d6?auto=format&fit=crop&w=800&q=80" alt="Modern tech workspace">
+    </div>
+    <div class="about-text reveal-up">
+      <span class="eyebrow">About Us</span>
+      <h2>Technology With Purpose.</h2>
+      <p>VORTEX INFO TECH brings together modern computing products, hardware solutions and professional technology services under one roof.</p>
+      <div class="stats-grid">
+        <div class="stat"><strong data-count="10">0</strong><span>Brands</span></div>
+        <div class="stat"><strong data-count="250">0</strong><span>Products</span></div>
+        <div class="stat"><strong data-count="500">0</strong><span>Happy Customers</span></div>
+        <div class="stat"><strong data-count="5">0</strong><span>Years Experience</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="section why-section">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-card reveal-up"><i class="ri-truck-line"></i><h4>Fast Delivery</h4><p>Doorstep delivery across the city within 48 hours.</p></div>
+      <div class="why-card reveal-up"><i class="ri-verified-badge-line"></i><h4>Genuine Products</h4><p>100% authentic hardware sourced directly from brands.</p></div>
+      <div class="why-card reveal-up"><i class="ri-customer-service-2-line"></i><h4>Expert Support</h4><p>Certified technicians available for pre and post-sale help.</p></div>
+      <div class="why-card reveal-up"><i class="ri-shield-star-line"></i><h4>Warranty Assistance</h4><p>Hassle-free warranty claims and replacements.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS / PORTFOLIO -->
+<section class="section projects-section" id="projects">
+  <div class="container">
+    <div class="section-head reveal-up light">
+      <span class="eyebrow">Portfolio</span>
+      <h2>Our Technology Projects</h2>
+    </div>
+    <div class="cat-pills reveal-up">
+      <button class="pill active" data-pfilter="all">All</button>
+      <button class="pill" data-pfilter="gaming">Gaming</button>
+      <button class="pill" data-pfilter="business">Business</button>
+      <button class="pill" data-pfilter="workstation">Workstation</button>
+      <button class="pill" data-pfilter="networking">Networking</button>
+    </div>
+    <div class="project-grid" id="projectGrid">
+      <!-- Injected by script.js -->
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testi-section">
+  <div class="container">
+    <div class="section-head reveal-up">
+      <span class="eyebrow">Testimonials</span>
+      <h2>What Our Customers Say</h2>
+    </div>
+    <div class="testi-carousel">
+      <div class="testi-track" id="testiTrack">
+        <div class="testi-card">
+          <p>"VORTEX INFO TECH helped me build my complete gaming setup. The support was excellent from start to finish."</p>
+          <div class="testi-user"><strong>Rohan Mehta</strong><span>Gaming Enthusiast</span><div class="stars">★★★★★</div></div>
+        </div>
+        <div class="testi-card">
+          <p>"Fast delivery and genuine components. Our office network setup was completed without any downtime."</p>
+          <div class="testi-user"><strong>Priya Sharma</strong><span>Office Manager</span><div class="stars">★★★★★</div></div>
+        </div>
+        <div class="testi-card">
+          <p>"My custom video editing workstation runs flawlessly. Expert advice on every component I needed."</p>
+          <div class="testi-user"><strong>Aman Patel</strong><span>Video Editor</span><div class="stars">★★★★★</div></div>
+        </div>
+      </div>
+      <div class="testi-dots" id="testiDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact">
+  <div class="container contact-inner">
+    <div class="contact-info reveal-up">
+      <span class="eyebrow">Contact</span>
+      <h2>Let's Talk Technology.</h2>
+      <p>Have a question or need a custom quote? Reach out and our team will respond within a day.</p>
+      <ul>
+        <li><i class="ri-map-pin-2-line"></i> Ahmedabad, Gujarat</li>
+        <li><i class="ri-phone-line"></i> +91 XXXXX XXXXX</li>
+        <li><i class="ri-mail-line"></i> info@infotechhub.com</li>
+      </ul>
+    </div>
+    <form class="contact-form reveal-up" id="contactForm">
+      <div class="form-row">
+        <input type="text" placeholder="Name" required>
+        <input type="email" placeholder="Email" required>
+      </div>
+      <div class="form-row">
+        <input type="tel" placeholder="Phone">
+        <input type="text" placeholder="Subject">
+      </div>
+      <textarea rows="4" placeholder="Message" required></textarea>
+      <button type="submit" class="btn btn-primary">Send Message <i class="ri-send-plane-line"></i></button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <a href="#home" class="logo">
+      <span class="logo-mark"><img src="assets/vortex-icon.png" alt="Vortex Info Tech"></span>VORTEX <span>INFO TECH</span></a>
+      <p>Technology. Performance. Possibility.</p>
+      <div class="social-icons">
+        <a href="#"><i class="ri-instagram-line"></i></a>
+        <a href="#"><i class="ri-youtube-line"></i></a>
+        <a href="#"><i class="ri-facebook-circle-line"></i></a>
+        <a href="#"><i class="ri-linkedin-box-line"></i></a>
+      </div>
+    </div>
+    <div>
+      <h5>Quick Links</h5>
+      <a href="#home">Home</a><a href="#products">Products</a><a href="#services">Services</a><a href="#about">About</a><a href="#contact">Contact</a>
+    </div>
+    <div>
+      <h5>Categories</h5>
+      <a href="#">Laptops</a><a href="#">Gaming</a><a href="#">Components</a><a href="#">Accessories</a><a href="#">Networking</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 VORTEX INFO TECH. All rights reserved.</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
